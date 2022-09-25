@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset Request</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/78133145?s=200&v=4">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+</head>
+
+<body>
+
+    {{!-- bare-bone header --}}
+    <header class="text-gray-700 bg-white border-t border-b body-font">
+        <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+            <a class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
+                <h1 class="text-2xl font-semibold tracking-tighter">{{project_name}}</h1>
+            </a>
+        </div>
+    </header>
+    {{!-- bare bone header ends --}}
+
+    <section class="text-gray-700 body-font">
+        <div class="container px-8 pt-24 mx-auto lg:px-4">
+            <div class="flex flex-wrap ">
+                <div class="px-8 py-6 text-left lg:px-24 lg:w-2/4 md:w-full lg:border-r">
+                    <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Password Reset Request
+                    </h2>
+                    <p class="mb-4 text-base leading-relaxed">
+                        If there would be an account registerd
+                        with given email, we'll send you a password reset link. <br /><br />
+                        <small>Make sure you check the spam
+                            folder as well.</small>
+                    </p>
+                </div>
+                <div class="px-8 py-6 text-left lg:px-24 lg:w-2/4 md:w-full">
+                    {{!-- <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer Information
+                        1
+                    </h2> --}}
+                    <p class="mb-4 text-base leading-relaxed"><br /></p>
+                    <form method="POST" action="">
+                        <div class="flex justify-center mt-6">
+                            <input
+                                class="flex-grow w-full px-4 py-2 mb-4 mr-4 text-base text-purple-700 bg-gray-100 border border-gray-400 rounded-lg focus:outline-none focus:border-purple-500 sm:mb-0 focus:bg-white"
+                                placeholder="Your Email" type="email" name="email" required autofocus>
+                            <button type="submit"
+                                class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:ringfocus:outline-none">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="../assets/js/resetPassword.js"></script>
+
+</html>

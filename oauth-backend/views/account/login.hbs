@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{app.title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/78133145?s=200&v=4">
+
+</head>
+
+<body>
+    {{!-- bare-bone header --}}
+    <header class="text-gray-700 bg-white border-t border-b body-font">
+        <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+            <a class="flex items-center w-40 font-medium text-gray-900 title-font md:mb-0">
+                <h1 class="text-2xl font-semibold tracking-tighter">{{project_name}}</h1>
+            </a>
+        </div>
+    </header>
+    {{!-- bare bone header ends --}}
+
+    {{!-- login component --}}
+    <section class="text-gray-700 body-font">
+        <div class="container px-8 pt-4 mx-auto lg:px-4">
+            <div class="flex flex-wrap text-center">
+                <div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full">
+                    {{!-- right sidebar --}}
+                    <div class="w-full h-100 items-start">
+                        <a class="flex items-center w-32 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                            <img src="../badges/WhitePink.svg" alt="">
+                        </a>
+                        <h1 class="mt-12 text-2xl font-semibold tracking-tighter text-blue-700 sm:text-3xl title-font">
+                            Log In</h1>
+                        <form id="loginForm" class="mt-6" action="./login" method="POST">
+                            <div>
+                                <input type="email" name="email" id="email" placeholder="Your Email "
+                                    class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0 "
+                                    autofocus required>
+                                <input type="hidden" name="client_id" id="client_id" />
+                                <input type="hidden" name="redirect_uri" id="redirect_uri" />
+                                <input type="hidden" name="scope" id="scope" />
+                            </div>
+                            <div class="mt-4 passView">
+                                <input type="password" name="password" id="password" placeholder="Your Password"
+                                    minlength="6"
+                                    class="w-full px-4 py-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"
+                                    required>
+                                <div class="mt-4" style="float: left;padding-left:5px">
+
+                                    <label id="passwordText">show password</label>
+                                    <input type="checkbox" id="togglePassword"><br>
+                                </div>
+
+
+                            </div>
+                            <div class="mt-2 text-right">
+                                <a href="./password/request"
+                                    class="text-sm font-semibold leading-relaxed text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot
+                                    Password?</a>
+                            </div>
+
+                            <p class="mt-12 font-semibold tracking-tighter text-red-500">{{server.message}}</p>
+                            <button type="submit"
+                                class="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">Log
+                                In</button>
+                        </form>
+                        <hr class="w-full my-6 border-gray-300">
+                        <p class="mt-8 text-center">Need an account? <a rel="noopener noreferrer" href="./register"
+                                class="font-semibold text-blue-500 hover:text-blue-700">Sign Up</a>
+                        </p>
+                    </div>
+                    {{!-- right sidebar ends --}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        const togglePassword = document.getElementById('togglePassword');
+
+
+        const showOrHidePassword = () => {
+            const password = document.getElementById('password');
+            if (password.type === 'password') {
+                password.type = 'text';
+            } else {
+                password.type = 'password';
+            }
+        };
+
+        togglePassword.addEventListener('change', showOrHidePassword);
+    </script>
+</body>
+
+</html>

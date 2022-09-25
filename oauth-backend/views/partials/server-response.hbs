@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{app.title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/78133145?s=200&v=4">
+
+</head>
+
+<body>
+    <section class="text-gray-700 body-font">
+        <div class="container px-8 mx-auto py-36 lg:px-4">
+            <div class="flex flex-col w-full mb-12 text-left lg:text-center">
+                <h2 class="mb-1 text-xs font-semibold tracking-widest text-blue-600 uppercase title-font">Welcome to
+                </h2>
+                <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-6xl title-font">
+                    {{project_name}}
+                </h1>
+                <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 lg:w-1/2">
+                    {{templateData.server.message}}
+                    <br />
+                </p>
+                <br />
+                <small id="redirectMsg"><i>you will be redirected to login page in 5 seconds</i></small>
+            </div>
+    </section>
+
+</body>
+
+<script>
+    var x = document.getElementById('redirectMsg')
+    x.style.display = "none"
+    if ({{ templateData.flag }} == 1) {
+        x.style.display = "block"
+        setTimeout(() => {
+            window.location.href = "./../../login"
+        }, 5000)
+    }
+</script>
+
+
+</html>

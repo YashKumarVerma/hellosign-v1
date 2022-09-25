@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev</title>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/78133145?s=200&v=4">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+</head>
+<style>
+    .inputWithIcon input[type="text"] {
+        padding-left: 10px;
+        padding-right: 60px;
+    }
+
+    .inputWithIcon {
+        position: relative;
+        align-items: flex-end;
+    }
+
+    .inputWithIcon button {
+        position: absolute;
+        right: 20px;
+        top: 8px;
+        color: #aaa;
+        float: right;
+    }
+
+    .inputWithIcon button :hover {
+        color: #212121;
+    }
+
+    .break{
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: normal;
+    }  
+    .del :hover {
+        color: red;
+    }
+
+    .card {
+        box-shadow: 1px -1px 13px 0px rgb(0 0 0 / 50%);
+    }
+</style>
+
+<body>
+    {{!-- dashboard header starts --}}
+    {{> header }}
+    {{!-- dashboard header ends --}}
+    <section class="text-gray-700 body-font mt-10">
+        <div class="flex justify-between">
+            <h1 class="text-2xl pl-10 font-semibold tracking-tighter">My Applications</h1>
+            <button id="newApplicationButton" class="mr-16 font-bold p-3 bordered hover:text-blue-700 ">+ New
+                Application</button>
+        </div>
+
+        <div class="container px-8 pt-10 mx-auto lg:px-4">
+            <div class="flex flex-wrap text-center">
+                {{#each app.items}}
+                {{!-- application cards loop start --}}
+                {{!-- first application card start --}}
+                <div class="px-2 py-6 mx-auto lg:w-1/2 md:w-1/2">
+                    <div class="p-4 border rounded-xl card">
+                        <button type="button" onclick="confirmation('{{_id}}')" style="float: right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width=" 30" height="24px" viewBox="0 0 20 20"
+                                fill="#d11a2a">
+                                <path fill-rule="evenodd"
+                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <h2 class="mb-3 w-50% pl-5 text-lg font-bold text-blue-700 lg:text-4xl title-font">
+                            {{name}}
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed break">{{description}}
+                        </p>
+                        {{!-- client id starts--}}
+                        <div class="relative ">
+                            <p class="text-left pl-1">
+                                <small>Client ID</small>
+                            </p>
+                            <p>
+                            <div class="inputWithIcon">
+
+                                <input type="text" placeholder="Client ID" id="{{_id}}" value="{{_id}}" readonly
+                                    class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                                </input>
+                                <button onclick="copyToClipboard('{{_id}}')">
+                                    <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                        <path
+                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                    </svg>
+                                </button>
+
+                            </div>
+                            </p>
+                        </div>
+                        {{!-- client id ends --}}
+
+                        {{!-- client secret starts --}}
+                        <div class="relative ">
+                            <p class="text-left pl-1">
+                                <small>Client Secret</small>
+                            </p>
+                            <div class="inputWithIcon">
+                                <input type="text" placeholder="Client Secret" id="{{clientSecret}}"
+                                    value="{{clientSecret}}" readonly
+                                    class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                                <button onclick="copyToClipboard('{{clientSecret}}')">
+                                    <svg width=" 30" height="24px" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                        <path
+                                            d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        {{!-- client secret ends --}}
+
+                        {{!-- scope starts --}}
+                        <div class="relative ">
+                            <p class="text-left pl-1">
+                                <small>Redirect URI</small>
+                            </p>
+                            {{#each authorizedRedirect}}
+                            <div class="inputWithIcon">
+                                <input type="text" id="{{this}}" placeholder="Client Secret" value="{{this}}" readonly
+                                    class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                                {{/each}}
+                                <button onclick="copyToClipboard('{{this._id}}')">
+                                    
+                                </button>
+                            </div>
+                        </div>
+                        {{!-- scope ends --}}
+
+                        {{!-- <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">registrations</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                50
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div> --}}
+
+                        <div class="relative ">
+                            <p class="text-left pl-1">
+                                <small>HelloSignAPI</small>
+                            </p>
+                            <p>
+                            <div class="inputWithIcon">
+                                <input type="text" placeholder="Client ID" id="{{_id}}_hello_sign" value="{{helloSignApiKey}}" readonly
+                                    class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                                </input>
+                            </div>
+                            </p>
+                        </div>
+
+                        
+                        <a href="/dashboard/dev/details/{{_id}}"> <button
+                                class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                                View Details
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+                {{!-- first application card end --}}
+                {{!-- application card loop ends --}}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="text-gray-700 body-font mt-20 mb-12" id="newApplicationSection" style="display: none;">
+        <form action="" id="newApplicationForm">
+            <div class="flex">
+                <h1 class="text-2xl pl-10 font-semibold tracking-tighter">New Application</h1>
+            </div>
+            <div class="container px-8 pt-10 mx-auto lg:px-4">
+                <div class="flex flex-wrap text-center">
+
+                    {{!-- application cards loop start --}}
+                    <div
+                        class="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-1/2 md:w-1/2 md:ml-auto md:mt-0">
+
+                        {{!-- Application Name --}}
+                        <div class="relative ">
+                            <input type="text" id="name" name="name" placeholder="Application Name" required
+                                class=" w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                        </div>
+
+                        {{!-- Support Email --}}
+                        <div class="relative ">
+                            <input type="email" id="email" name="email" placeholder="Support Email Address" required
+                                class=" w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                        </div>
+
+                        {{!-- Description --}}
+                        <div class="relative ">
+                            <input type="text" id="description" name="description" placeholder="Description about event"
+                                required
+                                class=" w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                        </div>
+
+                        {{!-- Redirection scope --}}
+                        <div class="relative ">
+                            <input type="text" id="redirectUri" name="redirectUri" required
+                                placeholder="URL to redirect after success"
+                                class=" w-full px-4 py-2 mb-1 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                        </div>
+
+                        {{!-- Scopes --}}
+                        <div class="flex flex-col items-center justify-center mt-10 mb-10">
+                            <small>The data your application would have access to. This is <b>clearly visible</b>
+                                at time of login
+                            </small>
+                            <div class="relative ">
+                                <div class="flex flex-col">
+                                    {{#each app.scope}}
+                                    <label class="inline-flex items-center mt-3">
+                                        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600"
+                                            value={{id}}><span class="ml-2 text-gray-700">{{display}}</span>
+                                    </label>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center mt-10 mb-10">
+                            <small>Is signing document required ?</small>
+                            <div class="relative">
+                                <label class="inline-flex items-center mt-3">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" value="signature">
+                                    <span class="ml-2 text-gray-700">Require Signature</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        {{!-- API Key --}}
+                        <div class="relative ">
+                            <input type="text" id="api_key" name="api_key" placeholder="API Key to use"
+                                required
+                                class=" w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                        </div>
+
+
+                        <button id="createApplicationButton" type="submit"
+                            class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">Create
+                            Application</button>
+                    </div>
+                    {{!-- application card loop ends --}}
+                </div>
+            </div>
+        </form>
+    </section>
+</body>
+<script src="../assets/js/util.js"></script>
+<script>
+    function confirmation(id) {
+        console.log("runnuning")
+
+        if (confirm('Are you sure you want to delete this app?')) {
+            document.getElementById(id).submit();
+        }
+
+    }
+</script>
+<script>
+    function processSubmission() {
+        /** get all selected scopes **/
+        const checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+        const scope = []
+        for (let i = 0; i < checkboxes.length; i++) {
+            scope.push(checkboxes[i].value)
+        }
+
+        const supportEmail = document.getElementById("email").value
+        const applicationName = document.getElementById("name").value
+        const description = document.getElementById("description").value
+        const helloSignApiKey = document.getElementById("api_key").value
+        const isSignatureRequired = scope.includes("signature")
+        const authorizedRedirect = document.getElementById("redirectUri").value.split(",")
+
+        if (applicationName === "" || supportEmail === "" || description === "" || window.accessToken === undefined || authorizedRedirect.length === 0) {
+            alert("Invalid Input");
+            return false
+        }
+
+
+        /** make web request **/
+        
+        fetch("./../application", {
+            credentials: "include",
+            method: 'POST',
+            cache: "no-cache",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: applicationName, supportEmail, scope, authorizedOrigin: [], authorizedRedirect, description,isSignatureRequired, helloSignApiKey
+            })
+        })
+            .then(parseFetchResponse)
+            .then(({ json, meta }) => {
+                if (meta.status === 201) {
+                    window.location.reload()
+                }
+                else {
+                    alert(`Error creating application`)
+                    window.location.reload()
+
+                }
+            })
+        
+    }
+
+
+
+    /** handle form submission **/
+    document.getElementById("newApplicationForm").addEventListener("submit", (e) => {
+        e.preventDefault()
+        try {
+            processSubmission()
+        } catch (e) {
+            alert("Erorr Creating Application")
+        }
+    })
+
+    /** to show new application block only on clicking the button **/
+    document.getElementById("newApplicationButton").addEventListener("click", () => {
+        document.getElementById("newApplicationSection").style.display = "block";
+        window.scrollTo(0, document.body.scrollHeight);
+    })
+
+    /** To copy to clip board **/
+    function copyToClipboard(input) {
+        var copyText = document.getElementById(input);
+        // var copyText = input;
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+    /**  Del item **/
+
+</script>
+
+
+
+</html>

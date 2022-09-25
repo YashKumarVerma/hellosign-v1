@@ -1,0 +1,39 @@
+api:
+  name: HelloAuth
+  description: 'The actual "sign"-in '
+  version: 1.0.0
+  route: 'api'
+
+database:
+  string: 'mongodb://127.0.0.1:27017/helloauth'
+  type: 'mongodb'
+
+server:
+  port: 5001
+
+jwt:
+  secret: superSecretToken
+  issuer: hephaestus
+  expires: 1d
+
+access_token:
+  secret: somethingVerySecure
+  issuer: hephaestus
+  expires: 1h
+
+confirm_email_token:
+  secret: ultraSecureSecret
+  issuer: hephaestus
+  expires: 15m
+
+nodemailer_config:
+  host: 'smtp.sendgrid.net'
+  port: 465
+  secure: true
+  auth:
+    user: 'apikey'
+    pass: 'blahblahblah'
+
+
+hello:
+  apikey: 29d570164024a3f3f017cb986565d619a80
